@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "trim-reach-432812-e6",
+  "private_key_id": "4495370df0bfb221cbd4c8d01f9ea02158f09605",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDNtD6hVC5T45+7\n7EgtWlUvzQynXTSIWk03A9PitRChDe9KeObXpkuKeu+XySPnAHDnAcvFObQYUujC\nOt9bhX6I7xfr71lEuXfbekrGlHU2mhKhH0bXE1CKi9uP5C075dargbjUS2LjPmTV\n/c1tS+PgqNfG+myrYUi3/ov3TWD+iDM/rucKIko7Ze1Vyj9fWIjrGOIuDZJY42DM\nWNchO3tC+EeN0St1XHwjN655lzphSrNNoMJ5ENQV+eLcCsUFo367DXvjyFes5xnH\nBn5r4VVE40luGhZuxHUBnvHUe90akT/JKvrCH3ocohsyNNW6Px9GeK/4eGLOczqK\nYUgTxw3nAgMBAAECggEANejYhyBQOeUMTkxIyDYF4E6tU8luBJQh61qh86a/Um4b\n+dkAqqCm6IZ6dz2cHqSzch8635fVVpCX9ptGQS6VsF501vz12LiArHD62ts6ctJj\nMn3Ha4Ng1sZ7htTmc+2y2mTXYy/UnTiTZa+r4EqE0LJ/RmMICswmqi3YUboiQuJH\nvph6f/mBo1i+SI/FZizxx2sDZNATZ5Jc7myLcSD3ZRVyTQg33AdQK9k/JMvZL9EL\nt1jGvmiZ01nNdIUPr3yfu7MOZf7FDuZk2JXN1/Pxgu84uBFrqPen4G4O/NPXlHlb\ntTZ4BL63iQAvrlLzvn+sLuqwcq7Wv3K87Zj3QIpk1QKBgQDnlcmECVIz/m341ArZ\nHseGuyJPYTfUm9pKtP5KjTIDsGMkFjpH6mewAebJp5xRTyNZHxAmmJlHMNXpgYav\noO5rcTSvVd69Qmi+6cG48N9Va6PT3N/GXDFWTuwP+PCw4d738sPQiLblx19DwPjM\nRqypcfW+seHMN8PGn5uiJxIe4wKBgQDjY/VsTA92Burjk+TER+jSXesR0p5WEoEC\n8QiPGiF4nXznoaxahJTwzw6JfzhyHpajvUt4jolq/K5VB3U2e05axnZ98eKNZsSe\n5A48OXOZGIBDgTPwAR3EojMvcIdUIdkZDMBSqmgqVU9aAIlEEsfVCqfXeie0MWnz\n7kLrRvvgLQKBgFjFwEOO1yX7J+i0T5w/AjkRTuui1qX3QExW6Qtm6H8lhDt3Ecwz\nfJ+pevBeAbvhXClzkNtar5bsj3M9JYX5aKti79EuV32xETntnUbpfpLd+iTijB0b\nhgYRpsfQo2MKkk/1jT5IyeN283ujYzva86DYgF0jDu0biz5+PEiCNZ4FAoGAeq0p\n8gRS7w0qWh8m85IMFLpgoNvtWmhfO9QIFxQ07JqikWDS2H7gz84VfK6rKD5CbRIq\nDl9v2c16zBra7Mq3ahfaQ3ZlEH5aI5LL70fbisQCJukkuR4RDk2nqbde+0/LjU0o\n0TBoRDaEOf1CEPzE3LYD+SdJFlj2XYi0h7RjHP0CgYBsyIpJ2r7FHsjpXCPZ54T0\nqlDjsbCLO9rTj8ey/+/zT/+jCb78mKfggDyXC3LMdpERliF7eT67l2mbiaRgMbfC\nHRHqB0c40YqCr4iGqE5ku8NYaImB6n6JfMM8NFKmXyiFHkZEUhf5AKck8Ju4alpI\nX92micjeZ+Kpc7hLneQbQg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "chee0630-piloti@trim-reach-432812-e6.iam.gserviceaccount.com",
+  "client_id": "102992510947124596529",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/chee0630-piloti%40trim-reach-432812-e6.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
