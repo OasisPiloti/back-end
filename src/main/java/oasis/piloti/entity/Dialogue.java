@@ -16,10 +16,10 @@ public class Dialogue {
     private Long id;
 
     @Column(nullable = false)
-    private String koreanText; // 한국 문장
+    private String koreanSentence; // 한국 문장
 
     @Column(nullable = false)
-    private String russianText; // 러시아 문장
+    private String russianSentence; // 러시아 문장
 
     @Column(nullable = false)
     private String audioUrl; // 음성 주소
@@ -35,18 +35,18 @@ public class Dialogue {
     private IncorrectDialogue incorrectDialogue;
 
     @Builder
-    private Dialogue(String koreanText, String russianText, String audioUrl, StudyCard studyCard) {
-        this.koreanText = koreanText;
-        this.russianText = russianText;
+    private Dialogue(String koreanSentence, String russianSentence, String audioUrl, StudyCard studyCard) {
+        this.koreanSentence = koreanSentence;
+        this.russianSentence = russianSentence;
         this.audioUrl = audioUrl;
         assignStudyCard(studyCard);
     }
 
     // 직접 빌더 패턴의 생성자를 활용하지 말고 해당 메서드를 활용하여 엔티티 생성
-    public static Dialogue buildDialogue(String koreanText, String russianText, String audioUrl, StudyCard studyCard) {
+    public static Dialogue buildDialogue(String koreanSentence, String russianSentence, String audioUrl, StudyCard studyCard) {
         return Dialogue.builder()
-                .koreanText(koreanText)
-                .russianText(russianText)
+                .koreanSentence(koreanSentence)
+                .russianSentence(russianSentence)
                 .audioUrl(audioUrl)
                 .studyCard(studyCard)
                 .build();

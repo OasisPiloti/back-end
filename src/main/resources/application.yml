@@ -12,3 +12,8 @@ spring:
         format_sql: true
       default_batch_fetch_size: 100
     open-in-view: false
+
+etri:
+  rest:
+    api:
+      key: ${ETRI_REST_API_KEY}
