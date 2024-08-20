@@ -19,30 +19,44 @@ public class StudyCard {
     private Long id;
 
     @Column(nullable = false)
-    private String title; // 제목
+    private String koreanTitle; // 한국 제목
 
     @Column(nullable = false)
-    private String description; // 설명
+    private String russianTitle; // 러시아 제목
+
+    @Column(nullable = false)
+    private String koreanDescription; // 한국 설명
+
+    @Column(nullable = false)
+    private String russianDescription; // 러시아 설명
 
     // 양방향 연관관계
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "studyCard")
     private List<Dialogue> dialogues = new ArrayList<>();
 
     // 양방향 연관관계
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "studyCard")
+    private List<Word> words = new ArrayList<>();
+
+    // 양방향 연관관계
     @OneToOne(mappedBy = "studyCard")
     private ReviewCard reviewCard;
 
     @Builder
-    private StudyCard(String title, String description) {
-        this.title = title;
-        this.description = description;
+    public StudyCard(String koreanTitle, String russianTitle, String koreanDescription, String russianDescription) {
+        this.koreanTitle = koreanTitle;
+        this.russianTitle = russianTitle;
+        this.koreanDescription = koreanDescription;
+        this.russianDescription = russianDescription;
     }
 
     // 직접 빌더 패턴의 생성자를 활용하지 말고 해당 메서드를 활용하여 엔티티 생성
-    public static StudyCard buildStudyCard(String title, String description) {
+    public static StudyCard buildStudyCard(String koreanTitle, String russianTitle, String koreanDescription, String russianDescription) {
         return StudyCard.builder()
-                .title(title)
-                .description(description)
+                .koreanTitle(koreanTitle)
+                .russianTitle(russianTitle)
+                .koreanDescription(koreanDescription)
+                .russianDescription(russianDescription)
                 .build();
     }
 
@@ -67,6 +81,16 @@ public class StudyCard {
 
         if (dialogue.getStudyCard() != this) {
             dialogue.assignStudyCard(this);
+        }
+    }
+
+    // StudyCard 1 <-> Word N
+    // 양방향 연관관계 편의 메서드
+    public void addWord(Word word) {
+        this.words.add(word);
+
+        if (word.getStudyCard() != this) {
+            word.assignStudyCard(this);
         }
     }
 }
