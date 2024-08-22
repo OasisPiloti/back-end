@@ -21,7 +21,7 @@ public class StudyCardController {
     private final StudyCardService studyCardService;
 
     @GetMapping("/api/study-cards")
-    public ResponseEntity<ApiResponse<List<StudyCardResponse.SimpleInfoDTO>>> getStudyCards() {
+    public  ResponseEntity<ApiResponse<List<StudyCardResponse.SimpleInfoDTO>>> getStudyCards() {
 
         List<StudyCardResponse.SimpleInfoDTO> studyCards = studyCardService.getStudyCards();
 

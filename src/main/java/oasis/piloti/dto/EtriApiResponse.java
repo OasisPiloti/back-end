@@ -14,6 +14,7 @@ public class EtriApiResponse {
         @JsonProperty("result")
         private int result;
 
+
         @JsonProperty("return_object")
         private EvaluationResultDTO returnObject;
 
@@ -32,10 +33,10 @@ public class EtriApiResponse {
         private String recognized;
 
         @JsonProperty("score")
-        private int score;
+        private String score;
 
         @Builder
-        public EvaluationResultDTO(String recognized, int score) {
+        public EvaluationResultDTO(String recognized, String score) {
             this.recognized = recognized;
             this.score = score;
         }
