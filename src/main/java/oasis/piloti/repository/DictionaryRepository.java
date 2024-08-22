@@ -1,7 +1,7 @@
-package oasis.piloti.Dictionary.Repository;
+package oasis.piloti.repository;
 
 
-import oasis.piloti.Dictionary.Domain.Dictionary;
+import oasis.piloti.entity.Dictionary;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,16 +1,13 @@
-package oasis.piloti.Dictionary.Service;
+package oasis.piloti.service;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
-import oasis.piloti.API.ApiBuilder;
-import oasis.piloti.Dictionary.DTO.DictionaryDTO;
-import oasis.piloti.Dictionary.DTO.DictionaryResponseDTO;
-import oasis.piloti.Dictionary.Domain.Dictionary;
-import oasis.piloti.Dictionary.Repository.DictionaryRepository;
-import oasis.piloti.errors.exception.Exception400;
+import oasis.piloti.dto.DictionaryDTO;
+import oasis.piloti.dto.DictionaryResponseDTO;
+import oasis.piloti.repository.DictionaryRepository;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.http.HttpStatus;
@@ -26,8 +23,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
-import static oasis.piloti.Dictionary.Domain.Dictionary.*;
-import static org.apache.logging.log4j.message.MapMessage.MapFormat.XML;
 
 @Transactional
 @Service
@@ -40,7 +35,7 @@ public class DictionaryService {
 
 
     @Transactional
-    public static ResponseEntity<ApiBuilder.ApiResponse<?>> GetMeaning(String word) throws IOException {
+    public static String GetMeaning(String word) throws IOException {
         String baseUrl = "https://krdict.korean.go.kr/api/search";
         String encodeWord = URLEncoder.encode(word, StandardCharsets.UTF_8);
 
@@ -70,16 +65,15 @@ public class DictionaryService {
         System.out.println(res);
 
         if (res.getChannel().getItem().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body(ApiBuilder.success("단어를 찾을 수 없습니다"));
+            return ("단어를 찾을 수 없습니다");
         }
 
         // DB에 뜻 저장
         //TO DO: 리스트로 만들어서 전부 출력하기
         String mean = res.getChannel().getItem().get(0).getSense().get(0).getDefinition();
-        String translation = res.getChannel().getItem().get(0).getTrans_word();
+        //String translation = res.getChannel().getItem().get(0).getTrans_word();
         //dictionaryRepository.save(Word.of(word, mean));
 
-        return ResponseEntity.status(HttpStatus.OK).body(ApiBuilder.success(translation));
-
+        return mean;
     }
 }

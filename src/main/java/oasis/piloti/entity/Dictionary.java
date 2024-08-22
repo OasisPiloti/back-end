@@ -1,4 +1,4 @@
-package oasis.piloti.Dictionary.Domain;
+package oasis.piloti.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;

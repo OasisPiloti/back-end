@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.Base64;
 import java.util.HashMap;
@@ -21,23 +24,24 @@ import java.util.Map;
 @Transactional(readOnly = true)
 public class EtriApiService {
 
-    private static final String ETRI_PRONUNCIATION_API_URL = "http://aiopen.etri.re.kr:8000/WiseASR/Pronunciation";
+    private static final String ETRI_PRONUNCIATION_API_URL = "http://aiopen.etri.re.kr:8000/WiseASR/PronunciationKor/";
 
     // 환경 변수로 등록한 ETRI API 키
     @Value("${etri.rest.api.key}")
-    private String etriApiKey;
+    private String access_key;
 
     // ETRI API 호출을 위한 클라이언트 모듈
     private final RestTemplate restTemplate;
+    private final ObjectMapper objectMapper;
 
-    public EtriApiResponse.PronunciationEvaluationDTO requestPronunciationEvaluation(String script, byte[] audioData) {
+    public EtriApiResponse.PronunciationEvaluationDTO requestPronunciationEvaluation(String script, byte[] audioData)  throws IOException {
 
         // ETRI API의 URI 가져오기
         URI uri = UriComponentsBuilder.fromHttpUrl(ETRI_PRONUNCIATION_API_URL).build().encode().toUri();
 
         // HTTP 헤더 설정
         HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.AUTHORIZATION, etriApiKey);
+        headers.set(HttpHeaders.AUTHORIZATION, access_key);
         headers.set(HttpHeaders.CONTENT_TYPE, "application/json; charset=UTF-8");
 
         // 요청 본문 데이터 생성
@@ -53,6 +57,9 @@ public class EtriApiService {
         // 요청 엔터티 생성
         HttpEntity<Map<String, Object>> mapHttpEntity = new HttpEntity<>(requestBody, headers);
 
+
+
+        /*
         // ETRI API 호출 및 응답 받기
         EtriApiResponse.PronunciationEvaluationDTO response = restTemplate.exchange(
                 uri,
@@ -60,6 +67,19 @@ public class EtriApiService {
                 mapHttpEntity,
                 EtriApiResponse.PronunciationEvaluationDTO.class
         ).getBody();
+       */
+
+        // ETRI API 호출 및 응답 받기 (String으로 수정)
+        ResponseEntity<String> response = restTemplate.exchange(
+                uri,
+                HttpMethod.POST,
+                mapHttpEntity,
+                String.class // 응답을 String으로 받기
+        );
+
+        // 응답 본문 가져오기
+        String responseBody = response.getBody();
+
 
         // 응답이 null인 경우 예외 처리
         if (response == null) {
@@ -67,6 +87,7 @@ public class EtriApiService {
         }
 
         // 응답 반환
-        return response;
+        //return response;
+        return objectMapper.readValue(responseBody, EtriApiResponse.PronunciationEvaluationDTO.class);
     }
 }

@@ -1,4 +1,4 @@
-package oasis.piloti.Dictionary.DTO;
+package oasis.piloti.dto;
 
 import lombok.Getter;
 import lombok.Setter;
