@@ -56,18 +56,7 @@ public class EtriApiService {
 
         // 요청 엔터티 생성
         HttpEntity<Map<String, Object>> mapHttpEntity = new HttpEntity<>(requestBody, headers);
-
-
-
-        /*
-        // ETRI API 호출 및 응답 받기
-        EtriApiResponse.PronunciationEvaluationDTO response = restTemplate.exchange(
-                uri,
-                HttpMethod.POST,
-                mapHttpEntity,
-                EtriApiResponse.PronunciationEvaluationDTO.class
-        ).getBody();
-       */
+        
 
         // ETRI API 호출 및 응답 받기 (String으로 수정)
         ResponseEntity<String> response = restTemplate.exchange(
@@ -87,7 +76,6 @@ public class EtriApiService {
         }
 
         // 응답 반환
-        //return response;
         return objectMapper.readValue(responseBody, EtriApiResponse.PronunciationEvaluationDTO.class);
     }
 }
