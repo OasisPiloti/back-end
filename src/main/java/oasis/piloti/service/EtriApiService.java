@@ -2,6 +2,7 @@ package oasis.piloti.service;
 
 import lombok.RequiredArgsConstructor;
 import oasis.piloti.dto.EtriApiResponse;
+import oasis.piloti.exception.PronunciationAccuracyException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +27,8 @@ public class EtriApiService {
 
     private static final String ETRI_PRONUNCIATION_API_URL = "http://aiopen.etri.re.kr:8000/WiseASR/PronunciationKor/";
 
+    private static final int MINIMUM_STANDARD_SCORE = 3;
+
     // 환경 변수로 등록한 ETRI API 키
     @Value("${etri.rest.api.key}")
     private String access_key;
@@ -34,7 +37,7 @@ public class EtriApiService {
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
 
-    public EtriApiResponse.PronunciationEvaluationDTO requestPronunciationEvaluation(String script, byte[] audioData)  throws IOException {
+    public void requestPronunciationEvaluation(String script, byte[] audioData)  throws IOException {
 
         // ETRI API의 URI 가져오기
         URI uri = UriComponentsBuilder.fromHttpUrl(ETRI_PRONUNCIATION_API_URL).build().encode().toUri();
@@ -69,13 +72,21 @@ public class EtriApiService {
         // 응답 본문 가져오기
         String responseBody = response.getBody();
 
-
         // 응답이 null인 경우 예외 처리
         if (response == null) {
             throw new RuntimeException("ETRI API 서버에 문제가 있습니다.");
         }
 
         // 응답 반환
-        return objectMapper.readValue(responseBody, EtriApiResponse.PronunciationEvaluationDTO.class);
+        EtriApiResponse.PronunciationEvaluationDTO pronunciationEvaluationDTO =
+                objectMapper.readValue(responseBody, EtriApiResponse.PronunciationEvaluationDTO.class);
+
+        // 발음 평가 점수
+        double score = Double.parseDouble(pronunciationEvaluationDTO.getReturnObject().getScore());
+
+        // 일정 점수보다 낮으면
+        if (score < MINIMUM_STANDARD_SCORE) {
+            throw new PronunciationAccuracyException("발음이 정확하지 않습니다. 다시 녹음 해주세요.");
+        }
     }
 }
