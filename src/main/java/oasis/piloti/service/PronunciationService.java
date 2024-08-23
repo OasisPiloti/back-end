@@ -13,12 +13,12 @@ public class PronunciationService {
 
     private final EtriApiService etriApiService;
 
-    public EtriApiResponse.PronunciationEvaluationDTO evaluatePronunciation(MultipartFile file, String script) throws Exception {
+    public void evaluatePronunciation(MultipartFile file, String script) throws Exception {
 
         // 파일을 바이트 배열로 변환
         byte[] audioData = file.getBytes();
 
         // ETRI 발음 평가 API 호출
-        return etriApiService.requestPronunciationEvaluation(script, audioData);
+        etriApiService.requestPronunciationEvaluation(script, audioData);
     }
 }

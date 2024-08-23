@@ -19,12 +19,12 @@ public class PronunciationController {
     private final PronunciationService pronunciationService;
 
     @PostMapping("/api/pronunciation/evaluate")
-    public ResponseEntity<ApiResponse<EtriApiResponse.PronunciationEvaluationDTO>> evaluatePronunciation(
+    public ResponseEntity<ApiResponse<Void>> evaluatePronunciation(
             @RequestParam("file") MultipartFile file,
             @RequestParam("script") String script) throws Exception {
 
-        EtriApiResponse.PronunciationEvaluationDTO evaluationResult = pronunciationService.evaluatePronunciation(file, script);
+        pronunciationService.evaluatePronunciation(file, script);
 
-        return buildSuccessResponseWithData(evaluationResult, "발음 평가를 성공적으로 완료했습니다.", HttpStatus.OK);
+        return buildSuccessResponseWithoutData("발음이 정확합니다.", HttpStatus.OK);
     }
 }
