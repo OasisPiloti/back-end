@@ -28,7 +28,7 @@ public class StudyCardController {
         return buildSuccessResponseWithData(studyCards, "학습 카드 리스트 조회를 성공하였습니다.", HttpStatus.OK);
     }
 
-    @GetMapping("/api/study-card/{studyCardId}")
+    @GetMapping("/api/study-cards/{studyCardId}")
     public ResponseEntity<ApiResponse<StudyCardResponse.InfoDTO>> getStudyCard(@PathVariable Long studyCardId) {
 
         StudyCardResponse.InfoDTO studyCard = studyCardService.getStudyCard(studyCardId);
